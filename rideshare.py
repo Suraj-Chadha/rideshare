@@ -392,7 +392,7 @@ def add():
 
 		abort(400,"password is not correct")
 
-	res=requests.post("http://127.0.0.1:80/api/v1/db/write",json={"insert":d,"column":["name","pass"],"table":"users","indicate":"0"})	
+	res=requests.post("http://52.70.63.132:80/api/v1/db/write",json={"insert":d,"column":["name","pass"],"table":"users","indicate":"0"})	
 
 
 
@@ -460,7 +460,7 @@ def insert_rider():
 
 
 
-	read_res=requests.post("http://127.0.0.1:/api/v1/db/read",json={"insert":d,"column":["name","pass"],"table":"users","where":["name"]})
+	read_res=requests.post("http://52.70.63.132:80/api/v1/db/read",json={"insert":d,"column":["name","pass"],"table":"users","where":["name"]})
 
 	if(read_res.json().get("response")==0):
 
@@ -468,7 +468,7 @@ def insert_rider():
 
 
 
-	res=requests.post("http://127.0.0.1:80/api/v1/db/write",json={"insert":d,"column":["name","timest","source","desti"],"table":"rides","indicate":"0"})	
+	res=requests.post("http://52.70.63.132:80/api/v1/db/write",json={"insert":d,"column":["name","timest","source","desti"],"table":"rides","indicate":"0"})	
 
 	if(res.json()==0):
 
@@ -488,7 +488,7 @@ def remove(name):
 
 		abort(405,"method not allowed")
 
-	res=requests.post("http://127.0.0.1:80/api/v1/db/write",json={"table":"users","delete":name,"column":"name","indicate":"1"})
+	res=requests.post("http://52.70.63.132:80/api/v1/db/write",json={"table":"users","delete":name,"column":"name","indicate":"1"})
 
 	
 
@@ -510,7 +510,7 @@ def delete_rideId(rideId):
 
 		abort(405,"method not allowed")
 
-	res=requests.post("http://127.0.0.1:80/api/v1/db/write",json={"table":"rides","delete":rideId,"column":"rideid","indicate":"1"})
+	res=requests.post("http://52.70.63.132:80/api/v1/db/write",json={"table":"rides","delete":rideId,"column":"rideid","indicate":"1"})
 
 	if(res.json()==0):
 
@@ -534,7 +534,7 @@ def join_ride(rideId):
 
 	d=[name,rideId]
 
-	read_res=requests.post("http://127.0.0.1:80/api/v1/db/read",json={"insert":d,"column":["name","pass"],"table":"users","where":["name"]})
+	read_res=requests.post("http://52.70.63.132:80/api/v1/db/read",json={"insert":d,"column":["name","pass"],"table":"users","where":["name"]})
 
 	if(read_res.json().get("response")==0):
 
@@ -542,7 +542,7 @@ def join_ride(rideId):
 
 	d=[rideId,name]
 
-	rideid_check=requests.post("http://127.0.0.1:80/api/v1/db/read",json={"insert":d,"column":["rideid","name","source","desti"],"table":"rides","where":["rideid"]})
+	rideid_check=requests.post("http://52.70.63.132:80/api/v1/db/read",json={"insert":d,"column":["rideid","name","source","desti"],"table":"rides","where":["rideid"]})
 
 	if(rideid_check.json().get("response")==0):
 
@@ -550,7 +550,7 @@ def join_ride(rideId):
 
 	
 
-	res=requests.post("http://127.0.0.1:80/api/v1/db/write",json={"insert":d,"column":["id","name"],"table":"rideusers","indicate":"0"})
+	res=requests.post("http://52.70.63.132:80/api/v1/db/write",json={"insert":d,"column":["id","name"],"table":"rideusers","indicate":"0"})
 
 	if(res.json()==0):
 
@@ -576,7 +576,7 @@ def ride_details(rideId):
 
 	user_list=[]
 
-	rideid_check=requests.post("http://127.0.0.1:80/api/v1/db/read",json={"insert":d,"column":["rideid","name","source","desti","timest"],"table":"rides","where":["rideid"]})
+	rideid_check=requests.post("http://52.70.63.132:80/api/v1/db/read",json={"insert":d,"column":["rideid","name","source","desti","timest"],"table":"rides","where":["rideid"]})
 
 	if(rideid_check.json().get("response")==0):
 
@@ -586,7 +586,7 @@ def ride_details(rideId):
 
 		
 
-		joined_users_check=requests.post("http://127.0.0.1:80/api/v1/db/read",json={"insert":d,"column":["id","name"],"table":"rideusers","where":["id"]})
+		joined_users_check=requests.post("http://52.70.63.132:80/api/v1/db/read",json={"insert":d,"column":["id","name"],"table":"rideusers","where":["id"]})
 
 
 
@@ -628,7 +628,7 @@ def upcoming_rides():
 
 	d=[source,destination]				
 
-	src_dest_check=requests.post("http://127.0.0.1:80/api/v1/db/read",json={"insert":d,"column":["rideid","name","source","desti","timest"],"table":"rides","where":['source','desti']})			
+	src_dest_check=requests.post("http://52.70.63.132:80/api/v1/db/read",json={"insert":d,"column":["rideid","name","source","desti","timest"],"table":"rides","where":['source','desti']})			
 
 	if(src_dest_check.json().get("response")==0):
 
@@ -668,4 +668,4 @@ def upcoming_rides():
 
 app.debug=True
 
-app.run(host="0.0.0.0",port 80)
+app.run(host="0.0.0.0",port=80)
